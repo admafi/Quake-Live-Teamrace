@@ -1,3 +1,3 @@
 * Quake-Live-Teamrace
 
-Some files I use for teamrace in Quake Live
+Some files that are used for teamrace in Quake Live.
