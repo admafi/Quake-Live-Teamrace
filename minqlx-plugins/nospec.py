@@ -4,9 +4,11 @@ import minqlx
 class nospec(minqlx.Plugin):
     def __init__(self):
         super().__init__()
-        self.add_hook("frame", self.handle_frame, priority=minqlx.PRI_LOWEST)
-    def handle_frame(self):
-        for p in self.players():
-            if p.team == "spectator":
-                p.put("free")
+        self.add_hook("team_switch_attempt", self.handle_team_switch)
+    def handle_team_switch(self, player, old_team, new_team):
+        if player in self.players() and player.team != "spectator":
+            if (player.privileges == None):
+                if self.game.state != "warmup":
+                    player.center_print("^1Sorry, you can't spectate now.")
 
+                    return minqlx.RET_STOP_ALL
